@@ -1,0 +1,56 @@
+/* src/components/Square.css */
+
+.square {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  /* border: 1px solid #ddd; */
+}
+
+.square::before,
+.square::after {
+  content: "";
+  position: absolute;
+  background-color: #ddd;
+  z-index: -1;
+}
+
+.square::before {
+  width: 100%;
+  height: 2px;
+  top: 50%;
+  left: 0;
+}
+
+.square::after {
+  height: 100%;
+  width: 2px;
+  left: 50%;
+  top: 0;
+}
+
+.piece {
+  background: #ddd;
+  border-radius: 50%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 4px;
+  font-size: 30px;
+  line-height: 30px;
+  border: 3px solid rgba(0, 0, 0, 0.5);
+  width: 40px;
+  height: 40px;
+  z-index: 90;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.piece:focus {
+  filter: brightness(110%);
+  background-color: black;
+}
