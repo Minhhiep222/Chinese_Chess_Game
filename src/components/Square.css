@@ -54,3 +54,21 @@
   filter: brightness(110%);
   background-color: black;
 }
+
+.valid-move {
+  border-radius: 50%;
+  background-color: #ff9500;
+  filter: brightness(90%);
+}
+
+/* .valid-move::after {
+  content: "";
+  height: 15px;
+  width: 15px;
+  left: 38%;
+  top: 40%;
+  background-color: #ff9500;
+  filter: brightness(150);
+  border-radius: 50%;
+  z-index: 1000000;
+} */
