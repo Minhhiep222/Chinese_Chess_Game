@@ -129,8 +129,6 @@ const Board = () => {
         (move) => move.row === row && move.col === col
       );
 
-      console.log("valid", valiMoves[0].col);
-
       if (valiMove) {
         const newBoard = [...board];
         //Di chuyển quân cờ qua ô đã được chọn
@@ -154,21 +152,26 @@ const Board = () => {
         setSelectPiece({ row, col, piece });
         // Tính toán các ô hợp lệ cho quân cờ đã chọn
         const moves =
-          piece.symbol === "車" ? getValidMovesForRook(board, row, col) : []; // Cập nhật các quân khác tùy vào loại quân
+          piece.symbol === "車"
+            ? getValidMovesForRook(piece, board, row, col)
+            : []; // Cập nhật các quân khác tùy vào loại quân
         setValiMoves(moves);
       }
     }
   };
+
   // Hàm tính các ô mà Xe có thể di chuyển (theo hàng và cột)
-  const getValidMovesForRook = (board, row, col) => {
+  const getValidMovesForRook = (piece, board, row, col) => {
     const moves = [];
 
     // Di chuyển theo chiều dọc (trên và dưới)
     for (let i = row - 1; i >= 0; i--) {
       console.log("ô hợp lệ", board[i][col]);
       if (board[i][col].symbol === " ") {
-        console.log("move", row);
         moves.push({ row: i, col });
+      } else if (piece.color !== board[i][col].color) {
+        moves.push({ row: i, col });
+        break;
       } else {
         break; // Dừng lại nếu gặp quân cờ khác
       }
@@ -177,8 +180,11 @@ const Board = () => {
       console.log("ô hợp lệ", board[i][col]);
       if (board[i][col].symbol === " ") {
         moves.push({ row: i, col });
-      } else {
+      } else if (piece.color !== board[i][col].color) {
+        moves.push({ row: i, col });
         break;
+      } else {
+        break; // Dừng lại nếu gặp quân cờ khác
       }
     }
 
@@ -186,15 +192,21 @@ const Board = () => {
     for (let i = col - 1; i >= 0; i--) {
       if (board[row][i].symbol === " ") {
         moves.push({ row, col: i });
-      } else {
+      } else if (piece.color !== board[row][i].color) {
+        moves.push({ row, col: i });
         break;
+      } else {
+        break; // Dừng lại nếu gặp quân cờ khác
       }
     }
     for (let i = col + 1; i < 9; i++) {
       if (board[row][i].symbol === " ") {
         moves.push({ row, col: i });
-      } else {
+      } else if (piece.color !== board[row][i].color) {
+        moves.push({ row, col: i });
         break;
+      } else {
+        break; // Dừng lại nếu gặp quân cờ khác
       }
     }
 
